@@ -1,7 +1,0 @@
-Java 27.0.1.0.3 - cost of ONE repaint of a 420x320 area (average of 20 repaints after warm-up)
-Stored dots  Point list: repaint    Point list: memory BufferedImage: repaint
-1000         2.747 ms               10 KB              0.188 ms (fixed)      
-10000        19.094 ms              196 KB             0.188 ms (fixed)      
-100000       147.716 ms             2048 KB            0.188 ms (fixed)      
-1000000      1510.903 ms            19536 KB           0.188 ms (fixed)      
-BufferedImage memory is fixed: 1000 x 800 x 4 bytes = 3125 KB, whatever the number of dots.

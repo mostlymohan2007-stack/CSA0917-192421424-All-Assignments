@@ -1,5 +1,0 @@
-# Copy this file to db.properties (same folder you run java from) and put YOUR MySQL details here.
-# Never commit db.properties to GitHub.
-db.url=jdbc:mysql://localhost:3306/campus_events
-db.user=root
-db.password=YOUR_PASSWORD
