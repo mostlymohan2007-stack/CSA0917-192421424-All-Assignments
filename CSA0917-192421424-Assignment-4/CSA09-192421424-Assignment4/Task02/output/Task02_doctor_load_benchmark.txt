@@ -1,0 +1,5 @@
+Department changes simulated: 2000 (Option A used 200)
+A. new connection + query each time :    16.324 ms per change
+B. shared connection, query each time:     0.319 ms per change
+C. load once (13.218 ms one-time) then Map lookup:      28.8 ns per change
+Map lookup is about 11,098 times faster than a query on a shared connection (rows seen: 2000000)

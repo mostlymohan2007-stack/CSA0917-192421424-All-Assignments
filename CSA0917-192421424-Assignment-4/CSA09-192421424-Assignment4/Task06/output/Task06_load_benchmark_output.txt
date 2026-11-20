@@ -1,0 +1,19 @@
+Database: jdbc:mysql://127.0.0.1:3307/campus_events (user root)   Java 27.0.1.0.3
+Rows in table: 100001
+
+A. Load ALL rows ON the Event Dispatch Thread (window blocked):
+   rows=100001  time=1261 ms  heap held=25 MB  longest EDT freeze=1270 ms
+B. Load ALL rows in a BACKGROUND thread (SwingWorker), then hand them to the table:
+   rows=100001  query+read time=983 ms  filling a table model on the EDT=52 ms  heap held (list + table model)=31 MB  longest EDT freeze=60 ms
+C. Paginated: one page of 25 rows (SELECT ... ORDER BY reg_id LIMIT 25 OFFSET n), average of 30 calls, includes COUNT(*) separately:
+   OFFSET      0 :   16.27 ms per page
+   OFFSET  50000 :  153.69 ms per page
+   OFFSET  99975 :  540.65 ms per page
+   COUNT(*) all events :   23.35 ms
+   rows held at a time=25  heap held=0 MB (compared with the full load)  longest EDT freeze=13 ms
+D. Alternative: keyset pagination (WHERE reg_id > last ORDER BY reg_id LIMIT 25), average of 30 calls:
+   after reg_id      0 :   11.54 ms per page
+   after reg_id  50000 :   11.65 ms per page
+   after reg_id  99975 :   10.99 ms per page
+E. Streaming CSV export of ALL rows (no list is built):
+   rows written=100001  time=858 ms  file size=6267 KB
