@@ -1,0 +1,33 @@
+Assignment 5 - A3 Generic DAO
+(Pseudocode style: header, numbered steps, '<-' assignment, complexity after END ALGORITHM. Adapt headings to the SIMATS standard if required.)
+
+INTERFACE Dao<T, K>                        // T = entity type, K = primary-key type
+  insert  (entity : T)           : T or void      // INSERT one row
+  findById(id : K)               : T or NULL      // SELECT ... WHERE key = ?
+  findAll ()                     : List<T>        // SELECT * FROM table
+  update  (entity : T)           : boolean        // UPDATE ... WHERE key = ?  (true if one row changed)
+  delete  (id : K)               : boolean        // DELETE ... WHERE key = ?
+END INTERFACE
+
+ABSTRACT CLASS JdbcDao<T, K> IMPLEMENTS Dao<T, K>          // the COMMON steps are written once
+  ABSTRACT : tableName, keyColumn, columnList,
+             bind(PreparedStatement ps, T entity),         // the part that DIFFERS: entity -> parameters
+             map(ResultSet rs) : T                         // the part that DIFFERS: row -> entity
+  METHOD findById(id)
+    1. sql <- "SELECT " + columnList + " FROM " + tableName + " WHERE " + keyColumn + " = ?"
+    2. TRY WITH RESOURCES  con <- dataSource.getConnection();  ps <- con.prepareStatement(sql)
+    3.     ps.setObject(1, id);  rs <- ps.executeQuery()
+    4.     IF rs.next() THEN RETURN map(rs) ELSE RETURN NULL
+    5. ON SQLException    RAISE DataAccessException(cause)      // connection, statement, result set closed automatically
+  END METHOD
+  // insert, findAll, update, delete follow the same five steps with their own SQL text
+END CLASS
+
+CLASS StudentDao EXTENDS JdbcDao<Student, String>             // K = String (register number)
+  tableName <- "student";  keyColumn <- "reg_no"
+  columnList <- "reg_no, name, email, department, year_of_study"
+  bind(ps, s):  ps.setString(1, s.regNo); ps.setString(2, s.name); ps.setString(3, s.email);
+                ps.setString(4, s.department); ps.setInt(5, s.year)
+  map(rs):      RETURN new Student(rs.getString("reg_no"), rs.getString("name"), rs.getString("email"),
+                                   rs.getString("department"), rs.getInt("year_of_study"))
+END CLASS

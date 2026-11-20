@@ -1,0 +1,23 @@
+Transaction COMMITTED.
+
+=== Migration report ===
+Input file            : passes_100000.txt (5975 KB)
+Lines read            : 100019
+Valid records loaded  : 99890   (100 batches of up to 1000)
+Rejected lines        : 129   (details in output\B4_migration_rejects.txt)
+         25 x amount is not a number '..'
+         25 x amount must be positive but is N
+         25 x bad validity date '..'
+         10 x duplicate pass id P..
+         19 x empty line
+         25 x expected 7 fields but found 5
+Rows in bus_pass      : 99890   -> matches the number of valid records
+Total time            : 2354 ms (42498 records/second)
+
+=== DatabaseMetaData ===
+Database product      : MySQL 8.4.9
+Driver                : MySQL Connector/J mysql-connector-j-8.4.0 (Revision: 1c3f5c149e0bfe31c7fbeb24e2d260cd890972c4)
+JDBC version          : 4.2
+URL / user            : jdbc:mysql://127.0.0.1:3307/transport_test / root@localhost
+Supports transactions : true,  batch updates: true
+Available tables      : [app_user, bus_pass]  (catalog transport_test)

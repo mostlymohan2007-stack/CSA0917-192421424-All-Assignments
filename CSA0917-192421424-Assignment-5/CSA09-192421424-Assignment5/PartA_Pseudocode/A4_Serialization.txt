@@ -1,0 +1,15 @@
+Assignment 5 - A4 Serialization
+(Pseudocode style: header, numbered steps, '<-' assignment, complexity after END ALGORITHM. Adapt headings to the SIMATS standard if required.)
+
+CLASS Hostel IMPLEMENTS Serializable   { serialVersionUID <- 1L;  String name;  List<Room> rooms }
+CLASS Room   IMPLEMENTS Serializable   { serialVersionUID <- 1L;  int number;  List<Resident> residents }
+CLASS Resident IMPLEMENTS Serializable {
+    serialVersionUID <- 1L
+    String  name;  String regNo;                    // persisted
+    TRANSIENT String     password;                  // secret: must never be written to a file
+    TRANSIENT Connection connection;                // live resource: not serializable, meaningless in another run
+    METHOD readObject(stream): stream.defaultReadObject();  connection <- NULL     // re-acquired lazily after loading
+}
+ALGORITHM SaveHostel(h, file):   OPEN ObjectOutputStream(file);  WRITE h  // writes the WHOLE reachable graph;  CLOSE
+ALGORITHM LoadHostel(file):      OPEN ObjectInputStream(file);   h <- READ;  CLOSE;  RETURN h
+   // ON InvalidClassException (serialVersionUID differs) or StreamCorruptedException -> report "file not readable", keep a backup

@@ -1,0 +1,85 @@
+Assignment 5 - A1 File Format
+(Pseudocode style: header, numbered steps, '<-' assignment, complexity after END ALGORITHM. Adapt headings to the SIMATS standard if required.)
+
+BINARY FILE LAYOUT (DataOutputStream, big-endian)
+  HEADER   : int  magic = 0x42505331 ("BPS1")   short version = 1   int recordCount
+  RECORD   : int  payloadLength
+             payload  = writeUTF(passId)  writeUTF(regNo)  writeUTF(name)  writeShort(routeNumber)
+                        writeUTF(stop)    writeInt(validity as epoch-day)  writeLong(amount in paise)
+             int  crc32(payload)                                    // detects a damaged record
+FIXED-LENGTH LAYOUT (RandomAccessFile), one record = 90 bytes
+  status 1 | passId 8 | regNo 12 | name 30 | route 2 | stop 25 | validity 4 | amount 8
+  offset(record number r) = HEADER_SIZE + (r - 1) x 90          // direct access, no scan
+
+ALGORITHM AddPass
+  PURPOSE   : append one new bus-pass record to the delimited text file
+  INPUT     : file F, record fields passId, regNo, name, route, stop, validity, amount
+  OUTPUT    : SUCCESS, or an error (record not stored)
+  DATA      : DELIM <- '|'        LF <- newline character
+BEGIN
+  1. FOR EACH field IN {passId, regNo, name, route, stop, validity, amount}
+  2.     IF field is empty OR field contains DELIM OR field contains LF THEN RETURN ERROR "invalid field"
+  3. END FOR
+  4. IF amount <= 0 OR validity is not a real calendar date THEN RETURN ERROR "invalid value"
+  5. line <- passId + DELIM + regNo + DELIM + name + DELIM + route + DELIM + stop + DELIM + validity + DELIM + amount + LF
+  6. OPEN F in APPEND mode                         // old data is never rewritten
+  7. WRITE all bytes of line in ONE write call     // a half-written line can only be the LAST line
+  8. FLUSH the buffer and FORCE the data to disk (sync)   // survives a power failure
+  9. CLOSE F
+ 10. RETURN SUCCESS
+END ALGORITHM
+TIME  : O(L) for a line of L bytes (independent of the number n of records)      SPACE : O(L)
+
+ALGORITHM FindPassById
+  PURPOSE   : return the record with a given pass id, ignoring damaged lines
+  INPUT     : file F, wantedId
+  OUTPUT    : the record, or NULL if there is no valid record with that id
+BEGIN
+  1. IF F does not exist THEN RAISE StoreMissing(F)          // caller decides: create an empty store or stop
+  2. OPEN F for reading through a buffer
+  3. lineNo <- 0
+  4. WHILE a next line exists
+  5.     line <- READ next line;   lineNo <- lineNo + 1
+  6.     fields <- SPLIT line at DELIM (keep empty fields)
+  7.     IF COUNT(fields) <> 7 OR any field fails its check THEN
+  8.         RECORD "line lineNo damaged: reason";  CONTINUE     // skip it, never stop the search
+  9.     END IF
+ 10.     IF fields[1] = wantedId THEN CLOSE F;  RETURN record(fields)
+ 11. END WHILE
+ 12. CLOSE F
+ 13. RETURN NULL
+END ALGORITHM
+TIME  : O(n) worst case (record absent or last)      SPACE : O(1) - one line at a time
+
+ALGORITHM ListPassesOnRoute
+  PURPOSE   : list every valid pass of one route
+  INPUT     : file F, route
+  OUTPUT    : list L of records (possibly empty), count of damaged lines
+BEGIN
+  1. L <- empty list;  damaged <- 0
+  2. OPEN F for reading through a buffer
+  3. WHILE a next line exists
+  4.     line <- READ next line
+  5.     TRY   record <- PARSE_AND_VALIDATE(line)
+  6.     ON DAMAGED RECORD   damaged <- damaged + 1;  CONTINUE
+  7.     IF record.route = route THEN APPEND record TO L
+  8. END WHILE
+  9. CLOSE F
+ 10. RETURN L, damaged
+END ALGORITHM
+TIME  : O(n)      SPACE : O(k) for the k records returned
+
+ALGORITHM OpenStoreSafely
+  PURPOSE   : handle a missing file and an incomplete last write when the program starts
+BEGIN
+  1. IF F does not exist THEN
+  2.     IF policy = CREATE THEN CREATE empty F ELSE RAISE StoreMissing(F)
+  3. END IF
+  4. IF F is not empty AND the last byte of F <> LF THEN        // power failed in the middle of a write
+  5.     cut <- position after the last LF in F
+  6.     COPY the damaged tail (bytes after cut) to a side file "F.damaged"
+  7.     TRUNCATE F to length cut                                // remove the partial record
+  8. END IF
+  9. RETURN F is ready
+END ALGORITHM
+// Rewriting the whole file (e.g. an update) is done as: write F.tmp completely -> sync -> ATOMIC rename F.tmp to F.

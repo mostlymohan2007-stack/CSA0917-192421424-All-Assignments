@@ -1,0 +1,2 @@
+Created passes_100000.txt: 100000 records + 19 blank lines
+Injected: damaged=100, duplicate pass ids=10, blank lines=19  -> expected valid records = 99890, expected rejected lines = 129

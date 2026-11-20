@@ -1,0 +1,12 @@
+=== 10 records, record #6 (P6) has amount -500.00 ===
+auto-commit (row by row)  : FAILED: Check constraint 'chk_amount' is violated.
+   rows left in the table : 5   <-- half-loaded data: P1..P5 stay, P7..P10 were never inserted
+single transaction        : FAILED, rolled back: Check constraint 'chk_amount' is violated.
+   rows left in the table : 0   <-- all or nothing
+
+=== 2,000 records (2 batches of 1,000), record #1501 has amount -1.00 ===
+batch, auto-commit        : FAILED: Check constraint 'chk_amount' is violated.
+   rows left in the table : 1999   <-- partial data remains
+batch, single transaction : FAILED, rolled back: Check constraint 'chk_amount' is violated.
+   rows left in the table : 0
+control (all amounts valid) : committed, rows in table = 2000

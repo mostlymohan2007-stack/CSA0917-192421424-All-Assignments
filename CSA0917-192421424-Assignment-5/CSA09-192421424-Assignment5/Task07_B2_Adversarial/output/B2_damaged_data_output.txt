@@ -1,0 +1,46 @@
+=== Damaged data: ORIGINAL naive parser versus the strict parser of the redesigned store ===
+D0 valid line (control)   input: "P2001|192421401|Ravi Kumar|R12|Main Gate|2026-12-31|1500.00"
+   original (naive) : ACCEPTED BusPass{P2001, 192421401, Ravi Kumar, R12, Main Gate, 2026-12-31, 1500.00}
+   redesigned       : ACCEPTED BusPass{P2001, 192421401, Ravi Kumar, R12, Main Gate, 2026-12-31, 1500.00}
+   what it reveals  : nothing: both parsers accept it
+
+D1 wrong field count (5 fields)   input: "P2002|192421402|Meena Iyer|R12|Library"
+   original (naive) : CRASH ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 5
+   redesigned       : skipped, reason: expected 7 fields but found 5
+   what it reveals  : the original design assumes every line has 7 fields; one short line throws and would stop the whole program
+
+D2 too many fields (9 fields)   input: "P2003|192421403|Anita Rao|R15|North Stop|2026-12-31|1800.00|EXTRA|MORE"
+   original (naive) : ACCEPTED BusPass{P2003, 192421403, Anita Rao, R15, North Stop, 2026-12-31, 1800.00}
+   redesigned       : skipped, reason: expected 7 fields but found 9
+   what it reveals  : the extra fields are silently ignored: wrong data is accepted WITHOUT any error (worse than a crash)
+
+D3 non-numeric amount   input: "P2004|192421404|Kiran Das|R12|Bus Stand|2026-12-31|abc"
+   original (naive) : CRASH NumberFormatException: Character a is neither a decimal digit number, decimal point, nor "e" notation exponential mark.
+   redesigned       : skipped, reason: amount is not a number 'abc'
+   what it reveals  : no validation before conversion: NumberFormatException; a bad amount can also hide as a very large/negative number
+
+D4 empty line   input: ""
+   original (naive) : CRASH ArrayIndexOutOfBoundsException: Index 1 out of bounds for length 1
+   redesigned       : skipped, reason: empty line
+   what it reveals  : split gives one empty field, so f[1] fails; blank lines are common (editors add them) and must be ignored safely
+
+D5 negative amount   input: "P2005|192421405|Sun Lee|R12|Gate|2026-12-31|-500.00"
+   original (naive) : ACCEPTED BusPass{P2005, 192421405, Sun Lee, R12, Gate, 2026-12-31, -500.00}
+   redesigned       : skipped, reason: amount must be positive but is -500.00
+   what it reveals  : the original design accepts it: syntactically valid but semantically wrong (business rule missing)
+
+D6 impossible date   input: "P2006|192421406|Tej Rao|R12|Gate|2026-13-45|1500.00"
+   original (naive) : CRASH DateTimeParseException: Text '2026-13-45' could not be parsed: Invalid value for MonthOfYear (valid values 1 - 12): 13
+   redesigned       : skipped, reason: bad validity date '2026-13-45'
+   what it reveals  : date errors are only found when the date is parsed; the original design has no per-line recovery
+
+D7 delimiter inside a name   input: "P2007|192421407|Rao|Anita|R12|Gate|2026-12-31|1500.00"
+   original (naive) : CRASH DateTimeParseException: Text 'Gate' could not be parsed at index 0
+   redesigned       : skipped, reason: expected 7 fields but found 8
+   what it reveals  : the delimiter appears in data: the line looks like 8 fields; the original format has no escaping rule
+
+D8 truncated last line (power failure)   input: "P2008|192421408|Sun"
+   original (naive) : CRASH ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3
+   redesigned       : skipped, reason: expected 7 fields but found 3
+   what it reveals  : an incomplete write looks like a short line; the store must treat it as damaged, not as a pass
+

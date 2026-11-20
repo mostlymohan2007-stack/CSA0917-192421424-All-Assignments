@@ -1,0 +1,6 @@
+Median of 3 runs, one transaction, local MySQL. LOAD DATA time includes writing the temporary file.
+Method                                                        10,000 rows   100,000 rows
+PreparedStatement batch of 1,000 (rewrite OFF)                   836.2 ms      7557.2 ms
+PreparedStatement batch of 1,000 (rewrite ON)                    208.0 ms      1536.7 ms
+Multi-row INSERT, 500 rows per statement                         193.0 ms      1409.1 ms
+LOAD DATA LOCAL INFILE                                           150.6 ms       921.0 ms

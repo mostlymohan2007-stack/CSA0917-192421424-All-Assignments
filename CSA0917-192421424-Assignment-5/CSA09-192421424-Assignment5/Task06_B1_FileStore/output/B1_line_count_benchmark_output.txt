@@ -1,0 +1,31 @@
+Java 27.0.1.0.3   (each OS read call = one call into the operating system)
+
+=== 1 MB attendance log: 1,048,599 bytes ===
+   Prediction: unbuffered = 1,048,599 read calls; 8 KB buffer = 129; 64 KB buffer = 17
+   1. FileInputStream.read() one byte at a time lines=30248     OS read calls=1048600     time=    1364.5 ms  (median of 3)
+   2. BufferedInputStream(8 KB).read() per byte lines=30248     OS read calls=130         time=      18.7 ms  (median of 3)
+   3. read(byte[8192]) manual buffer            lines=30248     OS read calls=130         time=       1.4 ms  (median of 3)
+   4. read(byte[65536]) manual buffer           lines=30248     OS read calls=18          time=       1.2 ms  (median of 3)
+   5. BufferedReader.readLine()                 lines=30248     OS read calls=130         time=       5.5 ms  (median of 3)
+   6. Files.readAllLines() (whole file in memory) lines=30248     heap held=2,250 KB (2.2 x file size)   time=      13.9 ms
+      (for comparison)                          heap held after counting with readLine: about 0 KB (buffers only)
+
+=== 10 MB attendance log: 10,485,767 bytes ===
+   Prediction: unbuffered = 10,485,767 read calls; 8 KB buffer = 1,281; 64 KB buffer = 161
+   1. FileInputStream.read() one byte at a time lines=302474    OS read calls=10485768    time=   13648.0 ms  (single run)
+   2. BufferedInputStream(8 KB).read() per byte lines=302474    OS read calls=1282        time=     183.2 ms  (median of 3)
+   3. read(byte[8192]) manual buffer            lines=302474    OS read calls=1282        time=       6.6 ms  (median of 3)
+   4. read(byte[65536]) manual buffer           lines=302474    OS read calls=162         time=       4.7 ms  (median of 3)
+   5. BufferedReader.readLine()                 lines=302474    OS read calls=1282        time=      17.4 ms  (median of 3)
+   6. Files.readAllLines() (whole file in memory) lines=302474    heap held=23,411 KB (2.3 x file size)   time=      19.7 ms
+      (for comparison)                          heap held after counting with readLine: about 0 KB (buffers only)
+
+=== 50 MB attendance log: 52,428,828 bytes ===
+   Prediction: unbuffered = 52,428,828 read calls; 8 KB buffer = 6,401; 64 KB buffer = 801
+   1. FileInputStream.read() one byte at a time lines=1512370   OS read calls=52428829    time=   68499.6 ms  (single run)
+   2. BufferedInputStream(8 KB).read() per byte lines=1512370   OS read calls=6402        time=     920.5 ms  (median of 3)
+   3. read(byte[8192]) manual buffer            lines=1512370   OS read calls=6402        time=      32.9 ms  (median of 3)
+   4. read(byte[65536]) manual buffer           lines=1512370   OS read calls=802         time=      23.1 ms  (median of 3)
+   5. BufferedReader.readLine()                 lines=1512370   OS read calls=6402        time=      69.1 ms  (median of 3)
+   6. Files.readAllLines() (whole file in memory) lines=1512370   heap held=114,190 KB (2.2 x file size)   time=     149.9 ms
+      (for comparison)                          heap held after counting with readLine: about 1 KB (buffers only)

@@ -1,0 +1,21 @@
+Assignment 5 - A2 Buffered IO
+(Pseudocode style: header, numbered steps, '<-' assignment, complexity after END ALGORITHM. Adapt headings to the SIMATS standard if required.)
+
+ALGORITHM CountLinesBuffered
+  PURPOSE   : count the lines of a large log with few calls to the operating system
+  INPUT     : file F          OUTPUT : number of lines
+  DATA      : buffer[8192] bytes (or 65536)
+BEGIN
+  1. lines <- 0
+  2. OPEN F for reading
+  3. LOOP
+  4.     n <- READ up to 8192 bytes of F INTO buffer          // ONE system call returns many bytes
+  5.     IF n = -1 THEN EXIT LOOP                              // end of file
+  6.     FOR i <- 0 TO n - 1
+  7.         IF buffer[i] = LF THEN lines <- lines + 1        // memory access only, no system call
+  8.     END FOR
+  9. END LOOP
+ 10. CLOSE F
+ 11. RETURN lines
+END ALGORITHM
+TIME  : O(S) for S bytes (CPU) and ceil(S / 8192) system calls      SPACE : O(1) - the 8 KB buffer

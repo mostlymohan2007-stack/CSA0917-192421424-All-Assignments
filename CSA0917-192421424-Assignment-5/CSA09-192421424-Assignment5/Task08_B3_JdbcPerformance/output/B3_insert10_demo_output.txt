@@ -1,0 +1,38 @@
+1. Statement            -> rows in table: 10
+--- after Statement: SELECT * FROM bus_pass ORDER BY pass_id ---
+pass_id     reg_no      name        route       stop        validity    amount      
+P1          192000001   Student 1   R2          Stop 2      2026-12-31  1001.00     
+P2          192000002   Student 2   R3          Stop 3      2026-12-31  1002.00     
+P3          192000003   Student 3   R4          Stop 4      2026-12-31  1003.00     
+P4          192000004   Student 4   R5          Stop 5      2026-12-31  1004.00     
+P5          192000005   Student 5   R6          Stop 6      2026-12-31  1005.00     
+P6          192000006   Student 6   R7          Stop 7      2026-12-31  1006.00     
+P7          192000007   Student 7   R8          Stop 8      2026-12-31  1007.00     
+P8          192000008   Student 8   R9          Stop 9      2026-12-31  1008.00     
+P9          192000009   Student 9   R10         Stop 10     2026-12-31  1009.00     
+P10         192000010   Student 10  R11         Stop 11     2026-12-31  1010.00     
+rows = 10
+2. PreparedStatement    -> rows in table: 10
+3. PreparedStatement batch (PassLoader) -> rows reported: 10, rows in table: 10
+--- after batch (the three methods gave identical contents): SELECT * FROM bus_pass ORDER BY pass_id ---
+pass_id     reg_no      name        route       stop        validity    amount      
+P1          192000001   Student 1   R2          Stop 2      2026-12-31  1001.00     
+P2          192000002   Student 2   R3          Stop 3      2026-12-31  1002.00     
+P3          192000003   Student 3   R4          Stop 4      2026-12-31  1003.00     
+P4          192000004   Student 4   R5          Stop 5      2026-12-31  1004.00     
+P5          192000005   Student 5   R6          Stop 6      2026-12-31  1005.00     
+P6          192000006   Student 6   R7          Stop 7      2026-12-31  1006.00     
+P7          192000007   Student 7   R8          Stop 8      2026-12-31  1007.00     
+P8          192000008   Student 8   R9          Stop 9      2026-12-31  1008.00     
+P9          192000009   Student 9   R10         Stop 10     2026-12-31  1009.00     
+P10         192000010   Student 10  R11         Stop 11     2026-12-31  1010.00     
+rows = 10
+--- ResultSetMetaData of SELECT * FROM bus_pass ---
+#    column     SQL type     Java class     precision  scale    nullable  
+1    pass_id    VARCHAR      String         10         0        NOT NULL  
+2    reg_no     VARCHAR      String         12         0        NOT NULL  
+3    name       VARCHAR      String         60         0        NOT NULL  
+4    route      VARCHAR      String         4          0        NOT NULL  
+5    stop       VARCHAR      String         40         0        NOT NULL  
+6    validity   DATE         Date           10         0        NOT NULL  
+7    amount     DECIMAL      BigDecimal     8          2        NOT NULL  

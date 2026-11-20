@@ -1,0 +1,15 @@
+=== Supplied example (expected: the P1003 record, then null for the damaged P1002 line) ===
+BusPass{P1003, 192421403, Anita Rao, R15, North Stop, 2026-12-31, 1800.00}
+null
+   damaged lines seen by that scan: [line 2: expected 7 fields but found 5]
+
+=== B1 test table ===
+T1 normal: find P1001                            -> BusPass{P1001, 192421401, Ravi Kumar, R12, Main Gate, 2026-12-31, 1500.00}
+T2 id that does not exist: find P9999            -> null
+T3 damaged line: find P1002                      -> null   [line 2: expected 7 fields but found 5]
+T4 add P1004 then find it                        -> BusPass{P1004, 192421404, Kiran Das, R12, Bus Stand, 2026-12-31, 1500.00}
+T5 list route R12 (expect P1001, P1004)          -> 2 records: [P1001, P1004]
+T6 add with the delimiter inside a field         -> rejected: Invalid pass: expected 7 fields but found 8
+T7 truncated last line: find P1006               -> null   [line 2: expected 7 fields but found 5, line 5: expected 7 fields but found 3]
+T8 earlier records still readable: find P1003    -> found
+T9 missing file                                  -> handled: store file not found (no_such_file.txt) - exists()=false

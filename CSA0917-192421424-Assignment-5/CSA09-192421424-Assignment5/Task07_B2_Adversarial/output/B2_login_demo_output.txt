@@ -1,0 +1,21 @@
+Unsafe query template : SELECT role FROM app_user WHERE username = '<user>' AND password_hash = SHA2('<pass>', 256)
+Safe query template   : SELECT role FROM app_user WHERE username = ? AND password_hash = SHA2(?, 256)
+
+Test                                             | UNSAFE version                             | SAFE (PreparedStatement)   | correct behaviour
+------------------------------------------------------------------------------------------------------------------------------------------------------
+L1 valid user and password                       | ACCEPTED as ADMIN                          | ACCEPTED as ADMIN          | accept
+L2 valid user, WRONG password                    | rejected                                   | rejected                   | reject
+L3 unknown user                                  | rejected                                   | rejected                   | reject
+L4 INJECTION: comment out the password check     | ACCEPTED as ADMIN                          | rejected                   | reject
+L5 INJECTION: always-true condition              | ACCEPTED as ADMIN                          | rejected                   | reject
+L6 INJECTION: UNION supplies a fake row          | ACCEPTED as ADMIN                          | rejected                   | reject
+L7 INJECTION: stacked statement                  | SQL error (SQLSyntaxErrorException): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DROP TABLE app_user; -- ' AND password_hash = SHA2('anything', 256)' at line 1 | rejected                   | reject
+L8 name with an apostrophe (legitimate)          | SQL error (SQLSyntaxErrorException): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'brien' AND password_hash = SHA2('pw', 256)' at line 1 | rejected                   | reject (no such user) without crashing
+
+Text actually sent to MySQL by the UNSAFE version for L4:
+   SELECT role FROM app_user WHERE username = 'admin' -- ' AND password_hash = SHA2('anything', 256)
+   (everything after -- is a comment, so the password is never checked)
+Text sent for L6:
+   SELECT role FROM app_user WHERE username = 'x' UNION SELECT 'ADMIN' -- ' AND password_hash = ...
+
+app_user still has 2 rows after all tests (the stacked DROP TABLE in L7 did not run: the driver rejects multiple statements by default; this protection is not a defence against L4-L6).

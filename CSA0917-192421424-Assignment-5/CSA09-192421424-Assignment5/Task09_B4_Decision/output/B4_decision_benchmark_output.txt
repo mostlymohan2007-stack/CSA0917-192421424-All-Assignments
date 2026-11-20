@@ -1,0 +1,29 @@
+Java 27.0.1.0.3, max heap 4096 MB, cores 12
+Expanded system: 12 campuses, 800,000 passes
+
+=== 1. Building the stores ===
+text file written       :      334 ms, size 49,325 KB
+serialized file written :     4817 ms, size 99,326 KB   <- this is also the cost of EVERY change if the whole list is re-saved
+MySQL table loaded      :    13783 ms (batches of 1,000, one transaction), rows = 800,000
+
+=== 2. Start-up: what must be done before the FIRST search can be answered? ===
+text file -> HashMap          :      852 ms, heap held 279 MB
+serialized file -> ArrayList  :     1250 ms, heap held 291 MB (800,000 objects)
+MySQL                         :        0 ms (data stays on the server; the first query can run immediately)
+
+=== 3. Searching ===
+text file scan, find the middle record :     244.5 ms per search
+text file scan, find the LAST record   :     489.3 ms per search
+HashMap lookup (after loading)         :    0.0000 ms per search (50 ns)
+MySQL, primary-key lookup (shared conn):    0.1314 ms per search (1000 of 1000 found)
+list route R12: text scan 586.4 ms (20,000 records)   MySQL with index idx_route 300.2 ms (20,000 rows)
+
+=== 4. Concurrent counters: 8 counter threads x 100 passes issued = 800 issues ===
+text file (append + sync, one JVM lock) :      824 ms  -> 971 passes/s   (lines written: 800)
+serialized file (whole list re-saved per issue): one save = 4817 ms -> at most 0.2 passes/s, and concurrent writers would overwrite each other
+MySQL, 8 connections, auto-commit per issue :      721 ms  -> 1,110 passes/s   (rows stored: 800)  | issuing an existing pass id again: accepted=0, rejected by PRIMARY KEY=2
+
+=== 5. One shared database versus separate serialized files for each campus ===
+12 campus files created: 2198 ms, about 8,143 KB each (66,666 passes each)
+one campus: open + deserialize its file  :      121 ms
+search a pass of unknown campus (worst case, campus 12):     1441 ms over up to 12 files   vs  MySQL primary-key lookup: about 0.2-0.5 ms

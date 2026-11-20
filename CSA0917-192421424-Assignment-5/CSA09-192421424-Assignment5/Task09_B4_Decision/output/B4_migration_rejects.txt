@@ -1,0 +1,130 @@
+line_no | reason | text
+997 | amount is not a number 'abc' | P997|192000997|Student 997|R38|Stop 23|2026-12-31|abc
+1994 | amount must be positive but is -250.00 | P1994|192001994|Student 1994|R35|Stop 20|2026-12-31|-250.00
+2991 | bad validity date '2026-13-45' | P2991|192002991|Student 2991|R32|Stop 17|2026-13-45|1991.00
+3988 | expected 7 fields but found 5 | P3988|192003988|Student 3988|R3|Stop 4
+4985 | amount is not a number 'abc' | P4985|192004985|Student 4985|R26|Stop 11|2026-12-31|abc
+5004 | empty line | 
+5983 | amount must be positive but is -250.00 | P5982|192005982|Student 5982|R23|Stop 8|2026-12-31|-250.00
+6980 | bad validity date '2026-13-45' | P6979|192006979|Student 6979|R20|Stop 5|2026-13-45|1979.00
+7977 | expected 7 fields but found 5 | P7976|192007976|Student 7976|R3|Stop 4
+8974 | amount is not a number 'abc' | P8973|192008973|Student 8973|R14|Stop 24|2026-12-31|abc
+9971 | amount must be positive but is -250.00 | P9970|192009970|Student 9970|R11|Stop 21|2026-12-31|-250.00
+9974 | duplicate pass id P9972 | P9972|192009973|Student 9973|R5|Stop 5|2026-12-31|1500.00
+10008 | empty line | 
+10969 | bad validity date '2026-13-45' | P10967|192010967|Student 10967|R8|Stop 18|2026-13-45|1967.00
+11966 | expected 7 fields but found 5 | P11964|192011964|Student 11964|R3|Stop 4
+12963 | amount is not a number 'abc' | P12961|192012961|Student 12961|R2|Stop 12|2026-12-31|abc
+13960 | amount must be positive but is -250.00 | P13958|192013958|Student 13958|R39|Stop 9|2026-12-31|-250.00
+14957 | bad validity date '2026-13-45' | P14955|192014955|Student 14955|R36|Stop 6|2026-13-45|1955.00
+15012 | empty line | 
+15955 | expected 7 fields but found 5 | P15952|192015952|Student 15952|R3|Stop 4
+16952 | amount is not a number 'abc' | P16949|192016949|Student 16949|R30|Stop 25|2026-12-31|abc
+17949 | amount must be positive but is -250.00 | P17946|192017946|Student 17946|R27|Stop 22|2026-12-31|-250.00
+18946 | bad validity date '2026-13-45' | P18943|192018943|Student 18943|R24|Stop 19|2026-13-45|1943.00
+19943 | expected 7 fields but found 5 | P19940|192019940|Student 19940|R3|Stop 4
+19949 | duplicate pass id P19945 | P19945|192019946|Student 19946|R5|Stop 5|2026-12-31|1500.00
+20016 | empty line | 
+20941 | amount is not a number 'abc' | P20937|192020937|Student 20937|R18|Stop 13|2026-12-31|abc
+21938 | amount must be positive but is -250.00 | P21934|192021934|Student 21934|R15|Stop 10|2026-12-31|-250.00
+22935 | bad validity date '2026-13-45' | P22931|192022931|Student 22931|R12|Stop 7|2026-13-45|1931.00
+23932 | expected 7 fields but found 5 | P23928|192023928|Student 23928|R3|Stop 4
+24929 | amount is not a number 'abc' | P24925|192024925|Student 24925|R6|Stop 1|2026-12-31|abc
+25020 | empty line | 
+25927 | amount must be positive but is -250.00 | P25922|192025922|Student 25922|R3|Stop 23|2026-12-31|-250.00
+26924 | bad validity date '2026-13-45' | P26919|192026919|Student 26919|R40|Stop 20|2026-13-45|1919.00
+27921 | expected 7 fields but found 5 | P27916|192027916|Student 27916|R3|Stop 4
+28918 | amount is not a number 'abc' | P28913|192028913|Student 28913|R34|Stop 14|2026-12-31|abc
+29915 | amount must be positive but is -250.00 | P29910|192029910|Student 29910|R31|Stop 11|2026-12-31|-250.00
+29924 | duplicate pass id P29918 | P29918|192029919|Student 29919|R5|Stop 5|2026-12-31|1500.00
+30024 | empty line | 
+30913 | bad validity date '2026-13-45' | P30907|192030907|Student 30907|R28|Stop 8|2026-13-45|1907.00
+31910 | expected 7 fields but found 5 | P31904|192031904|Student 31904|R3|Stop 4
+32907 | amount is not a number 'abc' | P32901|192032901|Student 32901|R22|Stop 2|2026-12-31|abc
+33904 | amount must be positive but is -250.00 | P33898|192033898|Student 33898|R19|Stop 24|2026-12-31|-250.00
+34901 | bad validity date '2026-13-45' | P34895|192034895|Student 34895|R16|Stop 21|2026-13-45|1895.00
+35028 | empty line | 
+35899 | expected 7 fields but found 5 | P35892|192035892|Student 35892|R3|Stop 4
+36896 | amount is not a number 'abc' | P36889|192036889|Student 36889|R10|Stop 15|2026-12-31|abc
+37893 | amount must be positive but is -250.00 | P37886|192037886|Student 37886|R7|Stop 12|2026-12-31|-250.00
+38890 | bad validity date '2026-13-45' | P38883|192038883|Student 38883|R4|Stop 9|2026-13-45|1883.00
+39887 | expected 7 fields but found 5 | P39880|192039880|Student 39880|R3|Stop 4
+39899 | duplicate pass id P39891 | P39891|192039892|Student 39892|R5|Stop 5|2026-12-31|1500.00
+40032 | empty line | 
+40885 | amount is not a number 'abc' | P40877|192040877|Student 40877|R38|Stop 3|2026-12-31|abc
+41882 | amount must be positive but is -250.00 | P41874|192041874|Student 41874|R35|Stop 25|2026-12-31|-250.00
+42879 | bad validity date '2026-13-45' | P42871|192042871|Student 42871|R32|Stop 22|2026-13-45|1871.00
+43876 | expected 7 fields but found 5 | P43868|192043868|Student 43868|R3|Stop 4
+44873 | amount is not a number 'abc' | P44865|192044865|Student 44865|R26|Stop 16|2026-12-31|abc
+45036 | empty line | 
+45871 | amount must be positive but is -250.00 | P45862|192045862|Student 45862|R23|Stop 13|2026-12-31|-250.00
+46868 | bad validity date '2026-13-45' | P46859|192046859|Student 46859|R20|Stop 10|2026-13-45|1859.00
+47865 | expected 7 fields but found 5 | P47856|192047856|Student 47856|R3|Stop 4
+48862 | amount is not a number 'abc' | P48853|192048853|Student 48853|R14|Stop 4|2026-12-31|abc
+49859 | amount must be positive but is -250.00 | P49850|192049850|Student 49850|R11|Stop 1|2026-12-31|-250.00
+49874 | duplicate pass id P49864 | P49864|192049865|Student 49865|R5|Stop 5|2026-12-31|1500.00
+50040 | empty line | 
+50857 | bad validity date '2026-13-45' | P50847|192050847|Student 50847|R8|Stop 23|2026-13-45|1847.00
+51854 | expected 7 fields but found 5 | P51844|192051844|Student 51844|R3|Stop 4
+52851 | amount is not a number 'abc' | P52841|192052841|Student 52841|R2|Stop 17|2026-12-31|abc
+53848 | amount must be positive but is -250.00 | P53838|192053838|Student 53838|R39|Stop 14|2026-12-31|-250.00
+54845 | bad validity date '2026-13-45' | P54835|192054835|Student 54835|R36|Stop 11|2026-13-45|1835.00
+55044 | empty line | 
+55843 | expected 7 fields but found 5 | P55832|192055832|Student 55832|R3|Stop 4
+56840 | amount is not a number 'abc' | P56829|192056829|Student 56829|R30|Stop 5|2026-12-31|abc
+57837 | amount must be positive but is -250.00 | P57826|192057826|Student 57826|R27|Stop 2|2026-12-31|-250.00
+58834 | bad validity date '2026-13-45' | P58823|192058823|Student 58823|R24|Stop 24|2026-13-45|1823.00
+59831 | expected 7 fields but found 5 | P59820|192059820|Student 59820|R3|Stop 4
+59849 | duplicate pass id P59837 | P59837|192059838|Student 59838|R5|Stop 5|2026-12-31|1500.00
+60048 | empty line | 
+60829 | amount is not a number 'abc' | P60817|192060817|Student 60817|R18|Stop 18|2026-12-31|abc
+61826 | amount must be positive but is -250.00 | P61814|192061814|Student 61814|R15|Stop 15|2026-12-31|-250.00
+62823 | bad validity date '2026-13-45' | P62811|192062811|Student 62811|R12|Stop 12|2026-13-45|1811.00
+63820 | expected 7 fields but found 5 | P63808|192063808|Student 63808|R3|Stop 4
+64817 | amount is not a number 'abc' | P64805|192064805|Student 64805|R6|Stop 6|2026-12-31|abc
+65052 | empty line | 
+65815 | amount must be positive but is -250.00 | P65802|192065802|Student 65802|R3|Stop 3|2026-12-31|-250.00
+66812 | bad validity date '2026-13-45' | P66799|192066799|Student 66799|R40|Stop 25|2026-13-45|1799.00
+67809 | expected 7 fields but found 5 | P67796|192067796|Student 67796|R3|Stop 4
+68806 | amount is not a number 'abc' | P68793|192068793|Student 68793|R34|Stop 19|2026-12-31|abc
+69803 | amount must be positive but is -250.00 | P69790|192069790|Student 69790|R31|Stop 16|2026-12-31|-250.00
+69824 | duplicate pass id P69810 | P69810|192069811|Student 69811|R5|Stop 5|2026-12-31|1500.00
+70056 | empty line | 
+70801 | bad validity date '2026-13-45' | P70787|192070787|Student 70787|R28|Stop 13|2026-13-45|1787.00
+71798 | expected 7 fields but found 5 | P71784|192071784|Student 71784|R3|Stop 4
+72795 | amount is not a number 'abc' | P72781|192072781|Student 72781|R22|Stop 7|2026-12-31|abc
+73792 | amount must be positive but is -250.00 | P73778|192073778|Student 73778|R19|Stop 4|2026-12-31|-250.00
+74789 | bad validity date '2026-13-45' | P74775|192074775|Student 74775|R16|Stop 1|2026-13-45|1775.00
+75060 | empty line | 
+75787 | expected 7 fields but found 5 | P75772|192075772|Student 75772|R3|Stop 4
+76784 | amount is not a number 'abc' | P76769|192076769|Student 76769|R10|Stop 20|2026-12-31|abc
+77781 | amount must be positive but is -250.00 | P77766|192077766|Student 77766|R7|Stop 17|2026-12-31|-250.00
+78778 | bad validity date '2026-13-45' | P78763|192078763|Student 78763|R4|Stop 14|2026-13-45|1763.00
+79775 | expected 7 fields but found 5 | P79760|192079760|Student 79760|R3|Stop 4
+79799 | duplicate pass id P79783 | P79783|192079784|Student 79784|R5|Stop 5|2026-12-31|1500.00
+80064 | empty line | 
+80773 | amount is not a number 'abc' | P80757|192080757|Student 80757|R38|Stop 8|2026-12-31|abc
+81770 | amount must be positive but is -250.00 | P81754|192081754|Student 81754|R35|Stop 5|2026-12-31|-250.00
+82767 | bad validity date '2026-13-45' | P82751|192082751|Student 82751|R32|Stop 2|2026-13-45|1751.00
+83764 | expected 7 fields but found 5 | P83748|192083748|Student 83748|R3|Stop 4
+84761 | amount is not a number 'abc' | P84745|192084745|Student 84745|R26|Stop 21|2026-12-31|abc
+85068 | empty line | 
+85759 | amount must be positive but is -250.00 | P85742|192085742|Student 85742|R23|Stop 18|2026-12-31|-250.00
+86756 | bad validity date '2026-13-45' | P86739|192086739|Student 86739|R20|Stop 15|2026-13-45|1739.00
+87753 | expected 7 fields but found 5 | P87736|192087736|Student 87736|R3|Stop 4
+88750 | amount is not a number 'abc' | P88733|192088733|Student 88733|R14|Stop 9|2026-12-31|abc
+89747 | amount must be positive but is -250.00 | P89730|192089730|Student 89730|R11|Stop 6|2026-12-31|-250.00
+89774 | duplicate pass id P89756 | P89756|192089757|Student 89757|R5|Stop 5|2026-12-31|1500.00
+90072 | empty line | 
+90745 | bad validity date '2026-13-45' | P90727|192090727|Student 90727|R8|Stop 3|2026-13-45|1727.00
+91742 | expected 7 fields but found 5 | P91724|192091724|Student 91724|R3|Stop 4
+92739 | amount is not a number 'abc' | P92721|192092721|Student 92721|R2|Stop 22|2026-12-31|abc
+93736 | amount must be positive but is -250.00 | P93718|192093718|Student 93718|R39|Stop 19|2026-12-31|-250.00
+94733 | bad validity date '2026-13-45' | P94715|192094715|Student 94715|R36|Stop 16|2026-13-45|1715.00
+95076 | empty line | 
+95731 | expected 7 fields but found 5 | P95712|192095712|Student 95712|R3|Stop 4
+96728 | amount is not a number 'abc' | P96709|192096709|Student 96709|R30|Stop 10|2026-12-31|abc
+97725 | amount must be positive but is -250.00 | P97706|192097706|Student 97706|R27|Stop 7|2026-12-31|-250.00
+98722 | bad validity date '2026-13-45' | P98703|192098703|Student 98703|R24|Stop 4|2026-13-45|1703.00
+99719 | expected 7 fields but found 5 | P99700|192099700|Student 99700|R3|Stop 4
+99749 | duplicate pass id P99729 | P99729|192099730|Student 99730|R5|Stop 5|2026-12-31|1500.00

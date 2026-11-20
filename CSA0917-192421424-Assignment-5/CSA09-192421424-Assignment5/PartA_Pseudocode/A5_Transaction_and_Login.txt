@@ -1,0 +1,39 @@
+Assignment 5 - A5 Transaction and Login
+(Pseudocode style: header, numbered steps, '<-' assignment, complexity after END ALGORITHM. Adapt headings to the SIMATS standard if required.)
+
+ALGORITHM TransferHostelToCanteen
+  INPUT     : hostelWalletId, canteenWalletId, amount = 500
+  OUTPUT    : SUCCESS or FAILURE (and in a failure NO money has moved)
+BEGIN
+  1. con <- OPEN connection
+  2. con.setAutoCommit(false)                                   // START the transaction
+  3. TRY
+  4.     rows1 <- EXECUTE  "UPDATE wallet SET balance = balance - ? WHERE id = ? AND balance >= ?"  (500, hostelWalletId, 500)
+  5.     IF rows1 <> 1 THEN RAISE InsufficientFunds                // nothing was debited
+  6.     rows2 <- EXECUTE  "UPDATE wallet SET balance = balance + ? WHERE id = ?"                   (500, canteenWalletId)
+  7.     IF rows2 <> 1 THEN RAISE UnknownWallet
+  8.     EXECUTE "INSERT INTO ledger(from_id, to_id, amount) VALUES (?, ?, ?)"                       (hostelWalletId, canteenWalletId, 500)
+  9.     con.commit()                                             // BOTH updates become permanent together
+ 10.     RETURN SUCCESS
+ 11. ON ANY EXCEPTION
+ 12.     con.rollback()                                           // undo the debit if the credit failed (or the power/connection broke)
+ 13.     RETURN FAILURE
+ 14. FINALLY
+ 15.     con.setAutoCommit(true);  CLOSE con
+END ALGORITHM
+TIME  : O(1) statements (indexed primary-key updates)      SPACE : O(1)
+
+ALGORITHM LoginUnsafe   (the GIVEN query - do not use)
+  1. sql <- "SELECT role FROM app_user WHERE username = '" + username + "' AND password_hash = SHA2('" + password + "', 256)"
+  2. rs <- statement.executeQuery(sql)            // user input became part of the SQL TEXT
+  3. IF rs.next() THEN RETURN role ELSE RETURN REJECTED
+
+ALGORITHM LoginSafe
+  INPUT : username, password (text typed by the user)      OUTPUT : role, or REJECTED
+BEGIN
+  1. sql <- "SELECT role FROM app_user WHERE username = ? AND password_hash = SHA2(?, 256)"   // FIXED text, no user data inside
+  2. TRY WITH RESOURCES  ps <- con.prepareStatement(sql)
+  3.     ps.setString(1, username);  ps.setString(2, password)    // user input is sent as DATA values only
+  4.     rs <- ps.executeQuery()
+  5.     IF rs.next() THEN RETURN rs.getString("role") ELSE RETURN REJECTED
+END ALGORITHM
