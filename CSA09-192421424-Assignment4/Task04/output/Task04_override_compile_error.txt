@@ -1,0 +1,4 @@
+BrokenOverride.java:9: error: mouseclicked(MouseEvent) in <anonymous BrokenOverride$1> does not override or implement a method from a supertype
+        @Override
+        ^
+1 error

@@ -1,0 +1,38 @@
+== Style 1: frame implements ActionListener
+   T1 valid, Convert button   : label='100.00 USD = 8,300.00 INR' dialog='Conversion result'
+   T2 valid, Enter in field   : label='2,500.50 INR = 30.13 USD' dialog='Conversion result'
+   T3 invalid amount 'abc'    : label='Invalid amount: enter a non-negative number.' dialog='Invalid amount'
+   T4 window closing (WindowAdapter): window still displayable = false
+== Style 2: named inner class
+   T1 valid, Convert button   : label='100.00 USD = 8,300.00 INR' dialog='Conversion result'
+   T2 valid, Enter in field   : label='2,500.50 INR = 30.13 USD' dialog='Conversion result'
+   T3 invalid amount 'abc'    : label='Invalid amount: enter a non-negative number.' dialog='Invalid amount'
+   T4 window closing (WindowAdapter): window still displayable = false
+== Style 3: anonymous inner class
+   T1 valid, Convert button   : label='100.00 USD = 8,300.00 INR' dialog='Conversion result'
+   T2 valid, Enter in field   : label='2,500.50 INR = 30.13 USD' dialog='Conversion result'
+   T3 invalid amount 'abc'    : label='Invalid amount: enter a non-negative number.' dialog='Invalid amount'
+   T4 window closing (WindowAdapter): window still displayable = false
+== Style 4: lambda (screenshots saved)
+   [screenshot saved] output/task05_lambda_valid_conversion_dialog.png  (276x127)
+   T1 valid, Convert button   : label='100.00 USD = 8,300.00 INR' dialog='Conversion result'
+   [screenshot saved] output/task05_lambda_valid_conversion_window.png  (360x202)
+   T2 valid, Enter in field   : label='2,500.50 INR = 30.13 USD' dialog='Conversion result'
+   [screenshot saved] output/task05_lambda_invalid_amount_dialog.png  (300x129)
+   T3 invalid amount 'abc'    : label='Invalid amount: enter a non-negative number.' dialog='Invalid amount'
+   [screenshot saved] output/task05_lambda_invalid_amount_window.png  (360x202)
+   T4 window closing (WindowAdapter): window still displayable = false
+== Extra: method reference + shared Action
+   T1 valid, Convert button   : label='100.00 USD = 8,300.00 INR' dialog='Conversion result'
+   T2 valid, Enter in field   : label='2,500.50 INR = 30.13 USD' dialog='Conversion result'
+   T3 invalid amount 'abc'    : label='Invalid amount: enter a non-negative number.' dialog='Invalid amount'
+   T4 window closing (WindowAdapter): window still displayable = false
+
+Sample conversion check: 100 USD -> INR = 8300.0, 8300 INR -> USD = 100.0
+
+Wiring code per version (non-blank, non-comment lines between WIRING-START and WIRING-END):
+   ConverterFrameListener.java    12 lines
+   ConverterInnerClass.java       16 lines
+   ConverterAnonymous.java        14 lines
+   ConverterLambda.java            8 lines
+   ConverterMethodRef.java        11 lines
