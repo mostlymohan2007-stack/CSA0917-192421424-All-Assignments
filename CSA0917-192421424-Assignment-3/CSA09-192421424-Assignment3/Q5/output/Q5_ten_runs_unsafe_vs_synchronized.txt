@@ -1,0 +1,23 @@
+### Unsynchronized version (SeatBookingUnsafe), 10 runs - expected 10 seats
+Run 1: Seats sold: 92   (expected 10)
+Run 2: Seats sold: 90   (expected 10)
+Run 3: Seats sold: 97   (expected 10)
+Run 4: Seats sold: 91   (expected 10)
+Run 5: Seats sold: 96   (expected 10)
+Run 6: Seats sold: 96   (expected 10)
+Run 7: Seats sold: 94   (expected 10)
+Run 8: Seats sold: 94   (expected 10)
+Run 9: Seats sold: 95   (expected 10)
+Run 10: Seats sold: 95   (expected 10)
+
+### Completed version (SeatBooking, synchronized method), 10 runs - expected 10 seats
+Run 1: Seats sold: 10
+Run 2: Seats sold: 10
+Run 3: Seats sold: 10
+Run 4: Seats sold: 10
+Run 5: Seats sold: 10
+Run 6: Seats sold: 10
+Run 7: Seats sold: 10
+Run 8: Seats sold: 10
+Run 9: Seats sold: 10
+Run 10: Seats sold: 10

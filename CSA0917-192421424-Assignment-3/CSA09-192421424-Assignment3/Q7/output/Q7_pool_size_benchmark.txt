@@ -1,0 +1,18 @@
+Java 27.0.1.0.3, cores = 12
+Generated 10,000 files. Expected by the generator: OK=9700, MISSING=100, CORRUPT=200
+
+--- A. Real file reading (no artificial delay), median of 5 runs after 2 warm-up runs ---
+pool= 1  median=   569.7 ms  min=   545.4 ms  summary correct=true  [OK=9700, MISSING=100, CORRUPT=200, UNEXPECTED=0, processed=10000, distinct results stored=9700]
+pool= 2  median=   322.1 ms  min=   313.2 ms  summary correct=true  [OK=9700, MISSING=100, CORRUPT=200, UNEXPECTED=0, processed=10000, distinct results stored=9700]
+pool= 4  median=   190.5 ms  min=   185.5 ms  summary correct=true  [OK=9700, MISSING=100, CORRUPT=200, UNEXPECTED=0, processed=10000, distinct results stored=9700]
+pool= 8  median=   122.9 ms  min=   117.7 ms  summary correct=true  [OK=9700, MISSING=100, CORRUPT=200, UNEXPECTED=0, processed=10000, distinct results stored=9700]
+pool=16  median=   119.8 ms  min=   115.7 ms  summary correct=true  [OK=9700, MISSING=100, CORRUPT=200, UNEXPECTED=0, processed=10000, distinct results stored=9700]
+pool=32  median=   104.5 ms  min=   103.0 ms  summary correct=true  [OK=9700, MISSING=100, CORRUPT=200, UNEXPECTED=0, processed=10000, distinct results stored=9700]
+
+--- B. SIMULATED 1 ms I/O latency per file (Thread.sleep) - models a slow disk / network share, median of 3 runs ---
+pool= 1  median=  24433.2 ms  min=  23857.7 ms  summary correct=true
+pool= 2  median=  12517.6 ms  min=  12247.1 ms  summary correct=true
+pool= 4  median=   6516.1 ms  min=   6478.7 ms  summary correct=true
+pool= 8  median=   3338.1 ms  min=   3337.0 ms  summary correct=true
+pool=16  median=   1722.6 ms  min=   1717.9 ms  summary correct=true
+pool=32  median=    678.3 ms  min=    673.0 ms  summary correct=true

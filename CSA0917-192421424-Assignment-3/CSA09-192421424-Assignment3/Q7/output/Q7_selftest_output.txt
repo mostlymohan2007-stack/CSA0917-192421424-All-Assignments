@@ -1,0 +1,11 @@
+Java 27.0.1.0.3, cores = 12
+Hand-checked expectation : OK=7, MISSING=2, CORRUPT=3, UNEXPECTED=0, processed=12
+Program summary          : OK=7, MISSING=2, CORRUPT=3, UNEXPECTED=0, processed=12, distinct results stored=7
+Totals R1=150 R2=500 R3=0 R4=375 R5=15 R6=350 R7=270
+Failure log:
+   c1.txt -> CorruptScoreFileException: c1.txt: corrupt (non-numeric mark)
+   c2.txt -> CorruptScoreFileException: c2.txt: corrupt (expected 6 fields)
+   c3.txt -> CorruptScoreFileException: c3.txt: corrupt (mark out of range)
+   m1.txt -> MissingScoreFileException: m1.txt: file is missing
+   m2.txt -> MissingScoreFileException: m2.txt: file is missing
+SELF-TEST PASSED

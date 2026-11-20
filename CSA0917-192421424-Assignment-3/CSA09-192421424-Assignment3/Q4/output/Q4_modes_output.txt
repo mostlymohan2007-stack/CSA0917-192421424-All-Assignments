@@ -1,0 +1,30 @@
+### compare
+Thread version : isAlive right after start = true
+  Station-A scanned 8, isAlive after join = false
+  Station-B scanned 6, isAlive after join = false
+  Station-C scanned 10, isAlive after join = false
+  Station-D scanned 7, isAlive after join = false
+Thread version : finish order = [Station-B, Station-D, Station-A, Station-C]  TOTAL = 31 (expected 31)
+Runnable version: finish order = [Station-B, Station-D, Station-A, Station-C]  TOTAL = 31 (expected 31)
+
+### lifecycle
+after new Thread()      : NEW
+right after start()     : RUNNABLE
+20 ms later (sleeping)  : TIMED_WAITING
+after join()            : TERMINATED, isAlive=false
+start() again          : IllegalThreadStateException (a dead thread cannot be restarted)
+
+### runvsstart
+t1.run()   :
+   body executed by thread: main
+t2.start() :
+   body executed by thread: Station-A
+run() blocked main for 26 ms (no parallelism)
+
+### daemon
+main ends now; daemon Station-D still running = true, scanned so far = 2
+finish order recorded = [Station-A]  (Station-D never finishes because the JVM exits)
+
+### executor
+Executor pool=4 : TOTAL = 31 (expected 31), elapsed = 96 ms
+Executor pool=2 : TOTAL = 31 (expected 31), elapsed = 126 ms

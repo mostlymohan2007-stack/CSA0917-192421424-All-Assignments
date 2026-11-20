@@ -1,0 +1,11 @@
+### deadlock mode
+mode=deadlock: still running after 2 s -> DEADLOCK suspected
+  Transfer-A-to-B is BLOCKED waiting for lock WalletDeadlock$Account@173160ff which is held by Transfer-B-to-A
+  Transfer-B-to-A is BLOCKED waiting for lock WalletDeadlock$Account@34dd00bb which is held by Transfer-A-to-B
+Balances unchanged: A=1000, B=1000
+
+### ordered mode (lock ordering)
+mode=ordered: both transfers finished. A=950, B=1050 (expected A=950, B=1050, total=2000)
+
+### trylock mode
+mode=trylock: both transfers finished. A=950, B=1050 (expected A=950, B=1050, total=2000), retries=1

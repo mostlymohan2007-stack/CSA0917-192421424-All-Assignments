@@ -1,0 +1,42 @@
+=== Q1 ATM test table ===
+T1 valid withdrawal  (card=card.txt, account=1001, amount=500)
+   Dispensed 500. New balance = 4500
+   [finally] card returned / session closed (finally runs so far: 1)
+   => handled by: none (success)
+
+T2 letters instead of number  (card=card.txt, account=abc, amount=100)
+   Invalid input: NumberFormatException - For input string: "abc"
+   [finally] card returned / session closed (finally runs so far: 2)
+   => handled by: catch (NumberFormatException | NullPointerException)
+
+T3 negative amount  (card=card.txt, account=1001, amount=-50)
+   Invalid amount: Amount must be positive
+   [finally] card returned / session closed (finally runs so far: 3)
+   => handled by: catch (IllegalArgumentException)
+
+T4 amount above balance  (card=card.txt, account=1002, amount=9999)
+   Declined: Balance 200 is less than 9999
+   [finally] card returned / session closed (finally runs so far: 4)
+   => handled by: catch (InsufficientFundsException)
+
+T5 card-reader file missing  (card=missing.txt, account=1001, amount=100)
+   Card reader file missing: missing.txt (The system cannot find the file specified)
+   [finally] card returned / session closed (finally runs so far: 5)
+   => handled by: catch (FileNotFoundException)
+
+T6 unknown account number  (card=card.txt, account=7777, amount=100)
+   Declined: No such account: 7777
+   [finally] card returned / session closed (finally runs so far: 6)
+   => handled by: catch (AccountNotFoundException)
+
+T7 null account input  (card=card.txt, account=null, amount=100)
+   Invalid input: NullPointerException - Cannot invoke "String.trim()" because "<parameter2>" is null
+   [finally] card returned / session closed (finally runs so far: 7)
+   => handled by: catch (NumberFormatException | NullPointerException)
+
+T8 zero amount  (card=card.txt, account=1001, amount=0)
+   Invalid amount: Amount must be positive
+   [finally] card returned / session closed (finally runs so far: 8)
+   => handled by: catch (IllegalArgumentException)
+
+Total withdrawals attempted = 8, finally blocks executed = 8

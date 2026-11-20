@@ -1,0 +1,12 @@
+Java 27.0.1.0.3, cores = 12
+Expected: OK=9700, MISSING=100, CORRUPT=200
+
+=== simulated latency per file = 0 microseconds (median of 3 runs) ===
+ExecutorService pool=8      :     125.6 ms  OK=9700, MISSING=100, CORRUPT=200, UNEXPECTED=0, processed=10000, distinct results stored=9700
+parallelStream              :     106.1 ms  OK=9700, MISSING=100, CORRUPT=200, UNEXPECTED=0, processed=10000, distinct results stored=9700
+one thread per file (10000) :     889.0 ms  OK=9700, MISSING=100, CORRUPT=200, UNEXPECTED=0, processed=10000, distinct results stored=9700
+
+=== simulated latency per file = 1000 microseconds (median of 3 runs) ===
+ExecutorService pool=8      :    3054.0 ms  OK=9700, MISSING=100, CORRUPT=200, UNEXPECTED=0, processed=10000, distinct results stored=9700
+parallelStream              :    2297.4 ms  OK=9700, MISSING=100, CORRUPT=200, UNEXPECTED=0, processed=10000, distinct results stored=9700
+one thread per file (10000) :     923.5 ms  OK=9700, MISSING=100, CORRUPT=200, UNEXPECTED=0, processed=10000, distinct results stored=9700

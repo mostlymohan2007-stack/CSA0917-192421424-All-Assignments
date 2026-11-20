@@ -1,0 +1,35 @@
+=== Q2 scenario table (one scenario per exception) ===
+S1 normal      : OK: answer1.pdf submitted
+S2 window shut : REJECTED: Exam window closed 30 min ago
+S3 unregistered: REJECTED: S999 is not registered for CSA0917
+S4 too large   : REJECTED: answer4.pdf is 450 KB, limit 200 KB
+S5 empty name  : BUG: File name is empty
+
+S6 storage fail (quota left 180 KB, file 190 KB), WITH cause:
+---- full chained stack trace ----
+SubmissionStorageException: Could not store answer6.pdf
+	at SubmissionStore.save(ExamPortal.java:53)
+	at SubmissionService.submit(ExamPortal.java:86)
+	at SubmissionController.handle(ExamPortal.java:97)
+	at ExamPortal.main(ExamPortal.java:129)
+Caused by: java.io.IOException: Disk quota exceeded
+	at SubmissionStore.write(ExamPortal.java:44)
+	at SubmissionStore.save(ExamPortal.java:51)
+	... 3 more
+---- end of stack trace ----
+   [log for admin] cause = java.io.IOException: Disk quota exceeded
+   result: SORRY: your file could not be saved, please try again later
+
+S7 same failure, but re-thrown WITHOUT the cause:
+---- full chained stack trace ----
+SubmissionStorageException: Could not store answer7.pdf
+	at SubmissionStore.saveLossy(ExamPortal.java:62)
+	at SubmissionService.submit(ExamPortal.java:86)
+	at SubmissionController.handle(ExamPortal.java:97)
+	at ExamPortal.main(ExamPortal.java:134)
+---- end of stack trace ----
+   [log for admin] cause = null
+   result: SORRY: your file could not be saved, please try again later
+
+getCause() with chaining   : java.io.IOException: Disk quota exceeded
+getCause() without chaining: null

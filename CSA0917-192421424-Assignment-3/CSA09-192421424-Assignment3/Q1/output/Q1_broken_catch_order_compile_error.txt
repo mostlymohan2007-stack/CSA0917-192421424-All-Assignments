@@ -1,0 +1,4 @@
+BrokenCatchOrder.java:12: error: exception NumberFormatException has already been caught
+        } catch (NumberFormatException e) {           // narrow (child) later -> unreachable -> compile-time error
+          ^
+1 error

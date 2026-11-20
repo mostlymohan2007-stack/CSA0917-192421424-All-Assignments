@@ -1,0 +1,31 @@
+=== 1. Same report from all three versions (good input) ===
+input/store1.csv = 410
+input/store2.csv = 1900
+input/store3_fixed.csv = 65
+input/store4.csv = 900
+GRAND TOTAL = 3275
+leaky == manual : true   manual == twr : true
+
+=== 2. Same FAILING input (store3.csv line 2 is corrupt) ===
+Nov 20, 2026 12:35:11 PM SalesReport parseLine
+SEVERE: FAILURE in file=input/store3.csv line=2 text='bad row,xx,yy' -> java.lang.NumberFormatException: For input string: "xx"
+Version 1 manual (leaky)   -> FAILED with IllegalStateException: Bad data in input/store3.csv line 2
+                              open readers=1, open writers=1, output file size=0 bytes
+Nov 20, 2026 12:35:12 PM SalesReport parseLine
+SEVERE: FAILURE in file=input/store3.csv line=2 text='bad row,xx,yy' -> java.lang.NumberFormatException: For input string: "xx"
+Version 2 manual finally   -> FAILED with IllegalStateException: Bad data in input/store3.csv line 2
+                              open readers=0, open writers=0, output file size=47 bytes
+Nov 20, 2026 12:35:12 PM SalesReport parseLine
+SEVERE: FAILURE in file=input/store3.csv line=2 text='bad row,xx,yy' -> java.lang.NumberFormatException: For input string: "xx"
+Version 3 try-with-res.    -> FAILED with IllegalStateException: Bad data in input/store3.csv line 2
+                              open readers=0, open writers=0, output file size=47 bytes
+
+=== 3. Order of closing and suppressed exceptions ===
+   open  R1-first-opened
+   open  R2-second-opened
+   body runs and throws
+   close R2-second-opened
+   close R1-first-opened
+   primary exception : java.lang.IllegalStateException: body failure
+   suppressed        : java.io.IOException: close() failed for R2-second-opened
+   suppressed        : java.io.IOException: close() failed for R1-first-opened

@@ -1,0 +1,16 @@
+Java 27.0.1.0.3, cores = 12
+
+=== Part 1: correctness (100 threads, 10 seats, 1000 rounds) ===
+Unsafe (no lock)                 rounds with double booking = 1000 / 1000, total double bookings = 89420
+synchronized method              rounds with double booking =    0 / 1000, total double bookings = 0
+synchronized block               rounds with double booking =    0 / 1000, total double bookings = 0
+AtomicBoolean[] CAS              rounds with double booking =    0 / 1000, total double bookings = 0
+ReentrantLock                    rounds with double booking =    0 / 1000, total double bookings = 0
+ConcurrentHashMap.putIfAbsent    rounds with double booking =    0 / 1000, total double bookings = 0
+
+=== Part 2: speed under contention (8 threads x 200,000 attempts, 1000 seats; correct strategies only) ===
+synchronized method                  66.9 ms total (best of 5),   41.8 ns per attempt
+synchronized block                   50.2 ms total (best of 5),   31.4 ns per attempt
+AtomicBoolean[] CAS                   8.1 ms total (best of 5),    5.1 ns per attempt
+ReentrantLock                        41.5 ms total (best of 5),   26.0 ns per attempt
+ConcurrentHashMap.putIfAbsent         4.8 ms total (best of 5),    3.0 ns per attempt

@@ -1,0 +1,25 @@
+### TokenCounter (while) - 5 runs
+Sum of tokens collected: 210 (expected 210)
+Sum of tokens collected: 210 (expected 210)
+Sum of tokens collected: 210 (expected 210)
+Sum of tokens collected: 210 (expected 210)
+Sum of tokens collected: 210 (expected 210)
+
+### TokenCounterIf (if instead of while), 4 consumers - 8 runs
+IF-variant: sum = 755 (expected 820), min count seen = -9, max count seen = 5
+IF-variant: sum = 820 (expected 820), min count seen = 0, max count seen = 5
+IF-variant: sum = 820 (expected 820), min count seen = 0, max count seen = 5
+IF-variant: sum = 765 (expected 820), min count seen = -8, max count seen = 5
+IF-variant: sum = 820 (expected 820), min count seen = 0, max count seen = 5
+IF-variant: sum = 820 (expected 820), min count seen = 0, max count seen = 5
+IF-variant: sum = 820 (expected 820), min count seen = 0, max count seen = 5
+IF-variant: sum = 755 (expected 820), min count seen = -9, max count seen = 5
+
+### TokenCounterTrace
+operations recorded = 60
+counter size after each operation: [1, 2, 3, 4, 5, 4, 3, 2, 1, 0, 1, 2, 1, 0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0, 1, 2, 1, 0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0, 1, 2, 1, 0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0]
+minimum size seen = 0, maximum size seen = 5  (must stay within 0..5)
+sum collected = 465 (expected 465)
+
+### MessBlockingQueue (alternative)
+ArrayBlockingQueue: Sum of tokens collected: 210 (expected 210), time 1548 microseconds

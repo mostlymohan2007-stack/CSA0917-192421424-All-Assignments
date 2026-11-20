@@ -1,0 +1,30 @@
+### 10 separate JVM runs - finishing order (equal priorities)
+Run 1: [Station-B, Station-D, Station-A, Station-C]
+Run 2: [Station-B, Station-A, Station-D, Station-C]
+Run 3: [Station-B, Station-D, Station-A, Station-C]
+Run 4: [Station-B, Station-D, Station-A, Station-C]
+Run 5: [Station-B, Station-D, Station-A, Station-C]
+Run 6: [Station-B, Station-D, Station-A, Station-C]
+Run 7: [Station-B, Station-D, Station-A, Station-C]
+Run 8: [Station-D, Station-B, Station-A, Station-C]
+Run 9: [Station-B, Station-D, Station-A, Station-C]
+Run 10: [Station-B, Station-A, Station-D, Station-C]
+
+### 10 runs - priorities A=10, B/C/D=1 (sleep-based work)
+Run 1: [Station-B, Station-D, Station-A, Station-C]
+Run 2: [Station-B, Station-A, Station-D, Station-C]
+Run 3: [Station-B, Station-A, Station-D, Station-C]
+Run 4: [Station-B, Station-D, Station-A, Station-C]
+Run 5: [Station-B, Station-D, Station-A, Station-C]
+Run 6: [Station-B, Station-D, Station-A, Station-C]
+Run 7: [Station-B, Station-D, Station-A, Station-C]
+Run 8: [Station-B, Station-D, Station-A, Station-C]
+Run 9: [Station-B, Station-D, Station-A, Station-C]
+Run 10: [Station-B, Station-D, Station-A, Station-C]
+
+### 5 runs - CPU-bound stations, priorities A=10, B/C/D=1
+Run 1: [Station-C, Station-B, Station-D, Station-A]
+Run 2: [Station-C, Station-B, Station-D, Station-A]
+Run 3: [Station-A, Station-B, Station-C, Station-D]
+Run 4: [Station-A, Station-D, Station-B, Station-C]
+Run 5: [Station-D, Station-B, Station-A, Station-C]

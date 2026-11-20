@@ -1,0 +1,8 @@
+card=true account=1001 amount=500 -> code 0
+card=true account=abc amount=100 -> code -1
+card=true account=1001 amount=-50 -> code -3
+card=true account=1002 amount=9999 -> code -5
+card=false account=1001 amount=100 -> code -6
+card=true account=7777 amount=100 -> code -4
+card=true account=null amount=100 -> code -1
+card=true account=1001 amount=0 -> code -3

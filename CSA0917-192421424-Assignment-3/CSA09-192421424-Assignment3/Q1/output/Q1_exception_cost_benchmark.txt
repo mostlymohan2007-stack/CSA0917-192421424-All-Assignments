@@ -1,0 +1,9 @@
+Java 27.0.1.0.3, 200000 operations per round, best of 5 rounds
+Return an error code               :      3.5 ns/op
+Throw+catch, stack depth 1         :    380.3 ns/op
+Throw+catch, stack depth 10        :   1119.0 ns/op
+Throw+catch, stack depth 50        :   2973.3 ns/op
+Throw+catch, stack depth 200       :   9959.3 ns/op
+Throw+catch, NO stack trace (depth 10):  56.7 ns/op
+Chained (wrapper + cause), depth 10:   1645.6 ns/op
+(sink=6160000)
